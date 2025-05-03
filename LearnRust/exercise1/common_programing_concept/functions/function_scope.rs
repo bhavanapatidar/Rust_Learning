@@ -19,4 +19,5 @@ fn main(){
 fn print_value(){
  // println!("{}",outside_variable)  this will trow an error "not found in this scope"
  println!("{}",GLOBAL_CONST);
+ //comment
 }
