@@ -1,5 +1,8 @@
 use std::collections::HashMap; // importing HashMap from the standard library , hashmap is a collection of key-value pairs, it uses a hash function to compute the index of the key-value pair in the collection, it is used to store and retrieve data efficiently, it is a part of the standard library
+// we use hashmap to store the orders, where the key is the order id and the value is the order object 
 
+use std::io;
+// importing io from the standard library, io is used to read input from the user, it is a part of the standard library
 mod order_management {
     use std::collections::HashMap;
 
@@ -12,28 +15,28 @@ mod order_management {
         pub amount: f64,
     }
 
-    pub struct OrderManager {
+    pub struct OrderManager {  // OrderManager is a struct that contains a hashmap of orders because we need to store the orders in a hashmap, where the key is the order id and the value is the order object
         pub orders: HashMap<u32, Order>,
     }
 
     impl OrderManager {
-        pub fn new() -> Self {
+        pub fn new() -> Self { // new is a function that creates a new instance of the OrderManager struct, it returns an instance of the OrderManager struct
             Self {
                 orders: HashMap::new(),
             }
         }
 
         pub fn create_order(&mut self, order_id: u32, dish_name: &str, customer_name: &str, amount: f64) {
-            let order = Order {
-                order_id,
+            let order = Order { // Order is a struct that contains the order details, it has fields for order id, dish name, customer name, table number, address and amount
+                order_id, // order_id is a field of the Order struct, it is the id of the order
                 dish_name: dish_name.to_string(),
                 customer_name: customer_name.to_string(),
                 table_number: None,
-                address: None,
+                address: None, // none means that the address is not provided yet
                 amount,
             };
-            self.orders.insert(order_id, order);
-            println!("Order #{} for '{}' created for customer '{}'.", order_id, dish_name, customer_name);
+            self.orders.insert(order_id, order); // insert is a function that inserts a new order into the hashmap, it takes the order id and the order object as parameters
+            println!("Order #{} for '{}' created for customer '{}'.", order_id, dish_name, customer_name); // here we are printing the order details, we are using the order id, dish name and customer name to print the order details
         }
 
         pub fn assign_table(&mut self, order_id: u32, table_number: u32) {
@@ -52,6 +55,8 @@ mod order_management {
                 println!("Order #{} not found.", order_id);
             }
         }
+
+      
 
         pub fn process_payment(&self, order_id: u32) {
             if let Some(order) = self.orders.get(&order_id) {
@@ -82,30 +87,103 @@ mod order_management {
 
 fn main() {
     let mut order_manager = order_management::OrderManager::new();
+    let mut input = String::new();
 
-    // Creating orders
-    order_manager.create_order(101, "Pasta Alfredo", "Alice", 15.99);
-    order_manager.create_order(102, "Margherita Pizza", "Bob", 12.50);
+    loop {
+        println!("\n--- Order Management System ---");
+        println!("1. Create Order");
+        println!("2. Assign Table");
+        println!("3. Cook Order");
+        println!("4. Process Payment");
+        println!("5. Schedule Delivery");
+        println!("6. Cancel Order");
+        println!("7. Exit");
+        println!("Enter your choice: ");
 
-    // Assigning tables
-    order_manager.assign_table(101, 5);
-    order_manager.assign_table(102, 6);
+        input.clear();
+        io::stdin().read_line(&mut input).unwrap();
+        let choice: u32 = input.trim().parse().unwrap_or(0);
 
-    // Cooking orders
-    order_manager.cook_order(101);
-    order_manager.cook_order(102);
+        match choice {
+            1 => {
+                println!("Enter Order ID: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let order_id: u32 = input.trim().parse().unwrap();
 
-    // Processing payments
-    order_manager.process_payment(101);
-    order_manager.process_payment(102);
+                println!("Enter Dish Name: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let dish_name = input.trim().to_string(); // Store the trimmed value in a new variable
 
-    // Scheduling deliveries
-    order_manager.schedule_delivery(101, "123 Main Street, Springfield");
-    order_manager.schedule_delivery(102, "456 Elm Street, Springfield");
+                println!("Enter Customer Name: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let customer_name = input.trim().to_string(); // Store the trimmed value in a new variable
 
-    // Canceling an order
-    println!("\n--- Canceling Order #101 ---");
-    order_manager.cancel_order(101);
+                println!("Enter Amount: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let amount: f64 = input.trim().parse().unwrap();
+
+                order_manager.create_order(order_id, &dish_name, &customer_name, amount);
+            }
+            2 => {
+                println!("Enter Order ID: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let order_id: u32 = input.trim().parse().unwrap();
+
+                println!("Enter Table Number: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let table_number: u32 = input.trim().parse().unwrap();
+
+                order_manager.assign_table(order_id, table_number);
+            }
+            3 => {
+                println!("Enter Order ID: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let order_id: u32 = input.trim().parse().unwrap();
+
+                order_manager.cook_order(order_id);
+            }
+            4 => {
+                println!("Enter Order ID: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let order_id: u32 = input.trim().parse().unwrap();
+
+                order_manager.process_payment(order_id);
+            }
+            5 => {
+                println!("Enter Order ID: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let order_id: u32 = input.trim().parse().unwrap();
+
+                println!("Enter Delivery Address: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let address = input.trim().to_string(); // Store the trimmed value in a new variable
+
+                order_manager.schedule_delivery(order_id, &address);
+            }
+            6 => {
+                println!("Enter Order ID: ");
+                input.clear();
+                io::stdin().read_line(&mut input).unwrap();
+                let order_id: u32 = input.trim().parse().unwrap();
+
+                order_manager.cancel_order(order_id);
+            }
+            7 => {
+                println!("Exiting the system. Goodbye!");
+                break;
+            }
+            _ => println!("Invalid choice. Please try again."),
+        }
+    }
 }
-
 
