@@ -40,7 +40,7 @@ mod order_management {
         }
 
         pub fn assign_table(&mut self, order_id: u32, table_number: u32) {
-            if let Some(order) = self.orders.get_mut(&order_id) {
+            if let Some(order) = self.orders.get_mut(&order_id) { // get_mut is a function that gets a mutable reference to the order object, it takes the order id as a parameter
                 order.table_number = Some(table_number);
                 println!("Customer '{}' assigned to Table #{}.", order.customer_name, table_number);
             } else {
