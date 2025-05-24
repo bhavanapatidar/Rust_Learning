@@ -24,4 +24,17 @@ fn main() {
     } else {
         println!("Order 1 does not exist in the HashMap.");
     }
+
+    // Iterate over the HashMap and print each order
+    for (id, dish) in &orders {
+        println!("Order ID: {}, Dish: {}", id, dish);
+    }
+    // compaire and accessing values
+    let order_id = 3; //it will check key 3 in hashmap
+    // Use `get` to access the value associated with the key
+    if let Some(dish) = orders.get(&order_id) { // Use `get` to access the value , &order_id is the key it will return Some(value) if it exists
+        println!("Order ID {} is for: {}", order_id, dish);
+    } else {
+        println!("Order ID {} does not exist.", order_id);
+    }
 }
