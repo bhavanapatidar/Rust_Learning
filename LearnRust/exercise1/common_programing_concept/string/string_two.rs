@@ -3,10 +3,10 @@
 use std::io;
 
 fn is_palindrome(s: &str) -> bool {
-    let chars: Vec<char> = s.chars().collect();
+    let chars: Vec<char> = s.chars().collect(); // Convert the string to a vector of characters for easy indexing
     let len = chars.len();
     for i in 0..len / 2 {
-        if chars[i] != chars[len - i - 1] {
+        if chars[i] != chars[len - i - 1] { // Compare characters from the start and end moving towards the center
             return false;
         }
     }
