@@ -13,13 +13,17 @@ fn is_palindrome(s: &str) -> bool {
     true
 }
 
-fn longest_palindromic_substring(s: &str) -> String {
+fn longest_palindromic_substring(s: &str) -> String { // Function to find the longest palindromic substring
+    if s.is_empty() {
+        return String::new(); // Return an empty string if the input is empty
+    }
     let mut max_length = 0;
     let mut longest_palindrome = String::new();
 
-    for i in 0..s.len() {
-        for j in i + 1..=s.len() {
-            let substring = &s[i..j];
+    for i in 0..s.len() {// Iterate over each character in the string
+        for j in i + 1..=s.len() {    // Iterate over all possible substrings starting from index i
+            let substring = &s[i..j]; // Get the substring from index i to j
+            // Check if the substring is a palindrome and if its length is greater than the current max_length
             if is_palindrome(substring) && substring.len() > max_length {
                 max_length = substring.len();
                 longest_palindrome = substring.to_string();
