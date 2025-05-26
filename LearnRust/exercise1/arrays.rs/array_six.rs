@@ -52,3 +52,27 @@ impl Solution {
         -1 // fallback
     }
 }
+
+//impl Solution {
+//     pub fn find_peak_element(nums: Vec<i32>) -> i32 {
+//         if nums.len() == 1 {
+//             return 0;
+//         }
+
+//         for (i, &val) in nums.iter().enumerate().skip(1).take(nums.len() - 2) {
+//             if val > nums[i - 1] && val > nums[i + 1] {
+//                 return i as i32;
+//             }
+//         }
+
+//         // Check first and last separately
+//         if nums[0] > nums[1] {
+//             return 0;
+//         }
+//         if nums[nums.len() - 1] > nums[nums.len() - 2] {
+//             return (nums.len() - 1) as i32;
+//         }
+
+//         -1
+//     }
+// }
