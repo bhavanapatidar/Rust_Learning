@@ -23,7 +23,7 @@ impl Solution {
 
                 first = num;
                 first_set = true;
-            } else if !second_set || num > second {
+            } else if !second_set || num > second { // If num is greater than the current second maximum and second is not set
                 third = second;
                 third_set = second_set;
 
