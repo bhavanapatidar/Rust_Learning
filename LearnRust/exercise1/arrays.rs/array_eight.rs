@@ -12,7 +12,8 @@ impl Solution {
 
         for &num in nums.iter() {
 
-            if !first_set || num > first {
+            if !first_set || num > first { // If num is greater than the current first maximum and first is not set
+                // Shift the current first and second maximums down
                
                 third = second;
                 third_set = second_set;
