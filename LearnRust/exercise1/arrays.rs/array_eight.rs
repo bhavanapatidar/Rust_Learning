@@ -15,11 +15,11 @@ impl Solution {
             if !first_set || num > first { // If num is greater than the current first maximum and first is not set
                 // Shift the current first and second maximums down
                
-                third = second;
-                third_set = second_set;
+                third = second; // Move second to third
+                third_set = second_set; // Update third_set to reflect the new value of third, because second is now the new third
 
-                second = first;
-                second_set = first_set;
+                second = first;  //current first becomes second
+                second_set = first_set; // Update second_set to reflect the new value of second, because first is now the new second
 
                 first = num;
                 first_set = true;
