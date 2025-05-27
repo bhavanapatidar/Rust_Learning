@@ -35,9 +35,9 @@ impl Solution {
             }
         }
 
-        if third_set {
-            third
-        } else {
+        if third_set { // If the third maximum is set, return it
+            third 
+        } else { // If the third maximum is not set, return the first maximum
             first
         }
     }
