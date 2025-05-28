@@ -8,11 +8,11 @@ impl Solution {
         let mut increasing = true; //true is because we want to check if the array is monotone increasing
         let mut decreasing = true;
 
-        for i in 1..nums.len() { 
-            if nums[i] < nums[i - 1] {
+        for i in 1..nums.len() { // Start from the second element and compare it with the previous one
+            if nums[i] < nums[i - 1] {// If the current element is less than the previous one, it cannot be increasing
                 increasing = false;
             }
-            if nums[i] > nums[i - 1] {
+            if nums[i] > nums[i - 1] {// If the current element is greater than the previous one, it cannot be decreasing
                 decreasing = false;
             }
         }
